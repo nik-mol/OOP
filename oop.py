@@ -9,7 +9,7 @@ class Student:
         self.finished_courses = []
         self.courses_in_progress = []
         self.grades = {}
-        self.avg_grade = 0
+        # self.avg_grade = 0
  
     def add_courses(self, course_name):
         self.finished_courses.append(course_name) 
@@ -36,17 +36,17 @@ class Student:
     def __lt__(self, other):
         if (not isinstance(self, Student)) or (not isinstance(other, Student)):
             return
-        if other.avg_grade < self.avg_grade:
+        if other.calculation_avg_grade() < self.calculation_avg_grade():
             print(f"Cредний балл выше у студента: {self.name}")
         else:
             print(f"Cредний балл выше у студента: {other.name}")
             
     def __str__(self) -> str:
-        self.calculation_avg_grade()
+        # self.calculation_avg_grade()
         res = f"""
 Имя: {self.name}
 Фамилия: {self.surname}
-Средняя оценка за домашние задания: {self.avg_grade}
+Средняя оценка за домашние задания: {self.calculation_avg_grade()}
 Курсы в процессе изучения: {', '.join(self.courses_in_progress)}
 Завершенные курсы: {','.join(self.finished_courses)}
 """
@@ -63,7 +63,7 @@ class Lecturer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)       
         self.grades = {}
-        self.avg_grade = 0
+        # self.avg_grade = 0
     
     def calculation_avg_grade(self):
         strl = []       
@@ -77,17 +77,17 @@ class Lecturer(Mentor):
     def __lt__(self, other):
         if (not isinstance(self, Lecturer)) or (not isinstance(other, Lecturer)):
             return 'Ошибка'
-        if other.avg_grade < self.avg_grade:
+        if other.calculation_avg_grade() < self.calculation_avg_grade():
             print(f"Cредний балл выше у лектора: {self.name}")
         else:
             print(f"Cредний балл выше у лектора: {other.name}")
 
     def __str__(self) -> str:
-        self.calculation_avg_grade()
+        # self.calculation_avg_grade()
         return f"""
 Имя: {self.name}
 Фамилия: {self.surname}
-Средняя оценка за лекции: {self.avg_grade}
+Средняя оценка за лекции: {self.calculation_avg_grade()}
 """
 
 class Reviewer(Mentor):
@@ -114,77 +114,78 @@ first_student = Student('Ivan', 'Ivanov', 'mail')
 first_student.add_courses('Введение в программирование')
 first_student.courses_in_progress += ['Python', 'Git']
 
-print(first_student)
-
 second_student = Student('Olesya', 'Ivanova', 'femail')
 second_student.add_courses('Введение в программирование')
 second_student.courses_in_progress += ['Python', 'Git']
-
-print(second_student)
 
 # LECTURERS:
 
 first_lecturer = Lecturer('Petr', 'Petrov')
 first_lecturer.courses_attached += ['Python', 'Git']
 
-print(first_lecturer)
-
 second_lecturer = Lecturer('Inna', 'Petrova')
 second_lecturer.courses_attached += ['Python', 'Git']
-
-print(second_lecturer)
 
 # REVIEWERS:
 
 first_reviewer = Reviewer('Petr', 'Petrov')
 first_reviewer.courses_attached += ['Python', 'Git']
 
-print(first_reviewer)
-
 second_reviewer = Reviewer('Inna', 'Petrova')
 second_reviewer.courses_attached += ['Python', 'Git']
 
-print(second_reviewer)
-
 # STUDENTS rate_hw:
 
-first_student.rate_hw(first_lecturer, 'Python', '10')
-first_student.rate_hw(first_lecturer, 'Python', '8')
-first_student.rate_hw(first_lecturer, 'Git', '10')
-first_student.rate_hw(first_lecturer, 'Git', '6')
-first_student.rate_hw(second_lecturer, 'Python', '9')
-first_student.rate_hw(second_lecturer, 'Python', '7')
-first_student.rate_hw(second_lecturer, 'Git', '9')
-first_student.rate_hw(second_lecturer, 'Git', '5')
+first_student.rate_hw(first_lecturer, 'Python', 10)
+first_student.rate_hw(first_lecturer, 'Python', 8)
+first_student.rate_hw(first_lecturer, 'Git', 10)
+first_student.rate_hw(first_lecturer, 'Git', 6)
+first_student.rate_hw(second_lecturer, 'Python', 9)
+first_student.rate_hw(second_lecturer, 'Python', 7)
+first_student.rate_hw(second_lecturer, 'Git', 9)
+first_student.rate_hw(second_lecturer, 'Git', 5)
 
-second_student.rate_hw(first_lecturer, 'Python', '10')
-second_student.rate_hw(first_lecturer, 'Python', '8')
-second_student.rate_hw(first_lecturer, 'Git', '10')
-second_student.rate_hw(first_lecturer, 'Git', '6')
-second_student.rate_hw(second_lecturer, 'Python', '9')
-second_student.rate_hw(second_lecturer, 'Python', '7')
-second_student.rate_hw(second_lecturer, 'Git', '9')
-second_student.rate_hw(second_lecturer, 'Git', '5')
+second_student.rate_hw(first_lecturer, 'Python', 10)
+second_student.rate_hw(first_lecturer, 'Python', 8)
+second_student.rate_hw(first_lecturer, 'Git', 10)
+second_student.rate_hw(first_lecturer, 'Git', 6)
+second_student.rate_hw(second_lecturer, 'Python', 9)
+second_student.rate_hw(second_lecturer, 'Python', 7)
+second_student.rate_hw(second_lecturer, 'Git', 9)
+second_student.rate_hw(second_lecturer, 'Git', 5)
 
 # REVIEWERS rate_hw:
 
-first_reviewer.rate_hw(first_student, 'Python', '10')
-first_reviewer.rate_hw(first_student, 'Python', '8')
-first_reviewer.rate_hw(first_student, 'Git', '10')
-first_reviewer.rate_hw(first_student, 'Git', '6')
-first_reviewer.rate_hw(second_student, 'Python', '9')
-first_reviewer.rate_hw(second_student, 'Python', '7')
-first_reviewer.rate_hw(second_student, 'Git', '9')
-first_reviewer.rate_hw(second_student, 'Git', '5')
+first_reviewer.rate_hw(first_student, 'Python', 10)
+first_reviewer.rate_hw(first_student, 'Python', 8)
+first_reviewer.rate_hw(first_student, 'Git', 10)
+first_reviewer.rate_hw(first_student, 'Git', 6)
+first_reviewer.rate_hw(second_student, 'Python', 9)
+first_reviewer.rate_hw(second_student, 'Python', 7)
+first_reviewer.rate_hw(second_student, 'Git', 9)
+first_reviewer.rate_hw(second_student, 'Git', 5)
 
-second_reviewer.rate_hw(first_student, 'Python', '10')
-second_reviewer.rate_hw(first_student, 'Python', '8')
-second_reviewer.rate_hw(first_student, 'Git', '10')
-second_reviewer.rate_hw(first_student, 'Git', '6')
-second_reviewer.rate_hw(second_student, 'Python', '9')
-second_reviewer.rate_hw(second_student, 'Python', '7')
-second_reviewer.rate_hw(second_student, 'Git', '9')
-second_reviewer.rate_hw(second_student, 'Git', '5')
+second_reviewer.rate_hw(first_student, 'Python', 10)
+second_reviewer.rate_hw(first_student, 'Python', 8)
+second_reviewer.rate_hw(first_student, 'Git', 10)
+second_reviewer.rate_hw(first_student, 'Git', 6)
+second_reviewer.rate_hw(second_student, 'Python', 9)
+second_reviewer.rate_hw(second_student, 'Python', 7)
+second_reviewer.rate_hw(second_student, 'Git', 9)
+second_reviewer.rate_hw(second_student, 'Git', 5)
+
+print(first_student)
+print("-" * 50)
+print(second_student)
+print("-" * 50)
+print(first_lecturer)
+print("-" * 50)
+print(second_lecturer)
+print("-" * 50)
+print(first_reviewer)
+print("-" * 50)
+print(second_reviewer)
+print("-" * 50)
 
 is_lt = (first_student < second_student)
 first_lecturer.__lt__(second_lecturer)
