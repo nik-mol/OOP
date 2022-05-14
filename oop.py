@@ -24,15 +24,14 @@ class Student:
             return 'Ошибка'
 
     def calculation_avg_grade(self):
-        count = 0
-        sum_ = 0
-        for values in self.grades.values():
-            for value in values:
-                count += 1
-                sum_ += value
-        if count != 0:
-            self.avg_grade = sum_ / count
-            return self.avg_grade
+        strl = []       
+        for _, grades_list in self.grades.items():
+            strl.extend(grades_list)
+        if len(strl) != 0:
+            avg_grade = sum(strl) / len (strl)
+            return avg_grade
+        return 0
+          
  
     def __lt__(self, other):
         if (not isinstance(self, Student)) or (not isinstance(other, Student)):
@@ -67,16 +66,14 @@ class Lecturer(Mentor):
         self.avg_grade = 0
     
     def calculation_avg_grade(self):
-        count = 0
-        sum_ = 0
-        for values in self.grades.values():
-            for value in values:
-                count += 1
-                sum_ += value
-        if count != 0:
-            self.avg_grade = sum_ / count
-            return self.avg_grade   
-        
+        strl = []       
+        for _, grades_list in self.grades.items():
+            strl.extend(grades_list)
+        if len(strl) != 0:
+            avg_grade = sum(strl) / len (strl)
+            return avg_grade
+        return 0
+
     def __lt__(self, other):
         if (not isinstance(self, Lecturer)) or (not isinstance(other, Lecturer)):
             return 'Ошибка'
