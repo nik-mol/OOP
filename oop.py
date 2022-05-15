@@ -9,8 +9,7 @@ class Student:
         self.finished_courses = []
         self.courses_in_progress = []
         self.grades = {}
-        # self.avg_grade = 0
- 
+        
     def add_courses(self, course_name):
         self.finished_courses.append(course_name) 
 
@@ -42,7 +41,6 @@ class Student:
             print(f"Cредний балл выше у студента: {other.name}")
             
     def __str__(self) -> str:
-        # self.calculation_avg_grade()
         res = f"""
 Имя: {self.name}
 Фамилия: {self.surname}
@@ -63,7 +61,6 @@ class Lecturer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)       
         self.grades = {}
-        # self.avg_grade = 0
     
     def calculation_avg_grade(self):
         strl = []       
@@ -83,7 +80,6 @@ class Lecturer(Mentor):
             print(f"Cредний балл выше у лектора: {other.name}")
 
     def __str__(self) -> str:
-        # self.calculation_avg_grade()
         return f"""
 Имя: {self.name}
 Фамилия: {self.surname}
@@ -106,7 +102,6 @@ class Reviewer(Mentor):
 Имя: {self.name}
 Фамилия: {self.surname}
 """
-
 
 # STUDENTS:
 
@@ -136,18 +131,18 @@ second_reviewer.courses_attached += ['Python', 'Git']
 
 # STUDENTS rate_hw:
 
-first_student.rate_hw(first_lecturer, 'Python', 10)
-first_student.rate_hw(first_lecturer, 'Python', 8)
-first_student.rate_hw(first_lecturer, 'Git', 10)
+first_student.rate_hw(first_lecturer, 'Python', 3)
+first_student.rate_hw(first_lecturer, 'Python', 4)
+first_student.rate_hw(first_lecturer, 'Git', 5)
 first_student.rate_hw(first_lecturer, 'Git', 6)
-first_student.rate_hw(second_lecturer, 'Python', 9)
 first_student.rate_hw(second_lecturer, 'Python', 7)
+first_student.rate_hw(second_lecturer, 'Python', 10)
 first_student.rate_hw(second_lecturer, 'Git', 9)
 first_student.rate_hw(second_lecturer, 'Git', 5)
 
-second_student.rate_hw(first_lecturer, 'Python', 10)
-second_student.rate_hw(first_lecturer, 'Python', 8)
-second_student.rate_hw(first_lecturer, 'Git', 10)
+second_student.rate_hw(first_lecturer, 'Python', 6)
+second_student.rate_hw(first_lecturer, 'Python', 5)
+second_student.rate_hw(first_lecturer, 'Git', 9)
 second_student.rate_hw(first_lecturer, 'Git', 6)
 second_student.rate_hw(second_lecturer, 'Python', 9)
 second_student.rate_hw(second_lecturer, 'Python', 7)
@@ -156,10 +151,10 @@ second_student.rate_hw(second_lecturer, 'Git', 5)
 
 # REVIEWERS rate_hw:
 
-first_reviewer.rate_hw(first_student, 'Python', 10)
-first_reviewer.rate_hw(first_student, 'Python', 8)
-first_reviewer.rate_hw(first_student, 'Git', 10)
+first_reviewer.rate_hw(first_student, 'Python', 6)
+first_reviewer.rate_hw(first_student, 'Python', 5)
 first_reviewer.rate_hw(first_student, 'Git', 6)
+first_reviewer.rate_hw(first_student, 'Git', 3)
 first_reviewer.rate_hw(second_student, 'Python', 9)
 first_reviewer.rate_hw(second_student, 'Python', 7)
 first_reviewer.rate_hw(second_student, 'Git', 9)
@@ -189,3 +184,39 @@ print("-" * 50)
 
 is_lt = (first_student < second_student)
 first_lecturer.__lt__(second_lecturer)
+
+print("-" * 50)
+
+students = [first_student,second_student]
+lecturers = [first_lecturer,second_lecturer]
+
+def avg_cource_students(students, cousre):
+    sum_ = 0
+    res = 0
+    grade_list = []
+    for student in students:
+        for key, value in student.grades.items():
+            if key == cousre:
+                grade_list.extend(value)            
+    sum_ += sum(grade_list)
+    res = round(sum_ / len(grade_list), 2)
+    print (f"Средняя оценка студентов по курсу {cousre}: {res}")
+      
+avg_cource_students(students, 'Python')
+avg_cource_students(students, 'Git')
+
+def avg_cource_lecturers(lecturers, cousre):
+    sum_ = 0
+    res = 0
+    grade_list = []
+    for lecturer in lecturers:
+        for key, value in lecturer.grades.items():
+            if key == cousre:
+                grade_list.extend(value)            
+    sum_ += sum(grade_list)
+    res = round(sum_ / len(grade_list), 2)
+    print (f"Средняя оценка лекторов по курсу {cousre}: {res}")
+      
+avg_cource_lecturers(lecturers, 'Python')
+avg_cource_lecturers(lecturers, 'Git')
+
